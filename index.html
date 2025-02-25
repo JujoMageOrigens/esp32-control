@@ -3,22 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control de Relé y LED</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Control de LED</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+        }
+        h1 {
+            color: #333;
+        }
+        .button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .button-on {
+            background-color: #28a745;
+            color: white;
+        }
+        .button-off {
+            background-color: #dc3545;
+            color: white;
+        }
+        .button:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Control de Relé y LED</h1>
-        <div class="control-panel">
-            <button id="relayOn" class="button on">Encender Relé</button>
-            <button id="relayOff" class="button off">Apagar Relé</button>
-            <br>
-            <button id="ledOn" class="button on">Encender LED</button>
-            <button id="ledOff" class="button off">Apagar LED</button>
-        </div>
-        <div id="motionStatus" class="status">Esperando... </div>
-        <button id="checkMotion" class="button motion">Comprobar Movimiento</button>
+        <h1>Control de LED</h1>
+        <button class="button button-on" onclick="controlLed('on')">Encender</button>
+        <button class="button button-off" onclick="controlLed('off')">Apagar</button>
     </div>
-    <script src="script.js"></script>
+    <script>
+        function controlLed(state) {
+            fetch('/led/' + state)
+                .then(response => response.text())
+                .then(data => console.log(data));
+        }
+    </script>
 </body>
 </html>
