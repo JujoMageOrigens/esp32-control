@@ -50,10 +50,13 @@
         <button class="button button-off" onclick="controlLed('off')">Apagar</button>
     </div>
     <script>
+        const baseUrl = 'http://192.168.1.52';  // Sustituye con la IP de tu ESP32
+
         function controlLed(state) {
-            fetch('/led/' + state)
+            fetch(baseUrl + '/led/' + state)  // Asegúrate de que la URL coincida con la del ESP32
                 .then(response => response.text())
-                .then(data => console.log(data));
+                .then(data => console.log(data))
+                .catch(err => console.error('Error al controlar el LED:', err));
         }
     </script>
 </body>
